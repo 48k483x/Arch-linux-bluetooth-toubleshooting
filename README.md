@@ -1,38 +1,52 @@
-== Arch Linux Bluetooth Troubleshooting ==
+# Arch Linux Bluetooth Troubleshooting
 
-== Description ==
-This repository contains instructions and resources for troubleshooting Bluetooth issues on Arch Linux systems. If you encounter errors like "No default controller available" or face difficulties with Bluetooth functionality, this guide will help you resolve them step by step.
+## Description
+This repository provides comprehensive guidance and resources for resolving Bluetooth issues on Arch Linux systems. If you encounter errors such as "No default controller available" or encounter difficulties with Bluetooth functionality, this guide will assist you in resolving them step by step.
 
-== Instructions ==
+## Instructions
 
-=== Step 1: Identifying the Problem ===
+### Step 1: Identifying the Problem
+```bash
 sudo dmesg | grep -i bluetooth
+```
 
-=== Step 2: Finding the Missing Firmware ===
-ls /lib/firmware/mediatek/BT_RAM_CODE_MT7961_1a_2_hdr.bin
+### Step 2: Finding the Missing Firmware
+```bash
+sudo ls /lib/firmware/mediatek/BT_RAM_CODE_MT7961_1a_2_hdr.bin
 
-=== Step 3: Locating an Alternative Firmware File ===
+#This command checks if the necessary firmware file is present.
+```
+
+### Step 3: Locating an Alternative Firmware File
+```bash
 ls ~/linux-firmware/mediatek
 
-=== Step 4: Copying and Renaming the Firmware File ===
+#If the firmware file is missing, this command helps you find an alternative one.
+```
+
+### Step 4: Copying and Renaming the Firmware File
+```bash
 sudo cp ~/linux-firmware/mediatek/BT_RAM_CODE_MT7961_1_2_hdr.bin /lib/firmware/mediatek/BT_RAM_CODE_MT7961_1a_2_hdr.bin
 
-=== Step 5: Reloading Bluetooth Modules ===
+#Copy and rename the firmware file to the correct location.
+```
+### Step 5: Reloading Bluetooth Modules
+```bash
 sudo modprobe -r btusb
 sudo modprobe btusb
+```
 
-=== Step 6: Restarting Bluetooth Service ===
+### Step 6: Restarting Bluetooth Service
+```bash
 sudo systemctl restart bluetooth.service
+```
 
-=== Step 7: Verifying Bluetooth Functionality ===
+### Step 7: Verifying Bluetooth Functionality
+```bash
 sudo dmesg | grep -i bluetooth
-bluetoothctl scan on
+bluetooth scan on
+```
+###
 
-=== Step 8: Additional Debugging Steps (if Necessary) ===
-Follow further troubleshooting steps and additional actions if the issue persists.
 
-== Contributing ==
-Contributions to improve this guide are welcome! If you have additional tips or solutions for Bluetooth troubleshooting on Arch Linux, feel free to open a pull request.
-
-== License ==
-This repository and its contents are licensed under the MIT License.
+sudo dmesg | grep -i bluetooth
