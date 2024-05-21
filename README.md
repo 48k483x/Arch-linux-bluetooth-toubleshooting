@@ -47,6 +47,3 @@ sudo dmesg | grep -i bluetooth
 bluetooth scan on
 ```
 ###
-
-
-sudo dmesg | grep -i bluetooth
